@@ -1,0 +1,141 @@
+<!--
+    Winhweel.js basic code wheel example by Douglas McKechie @ www.dougtesting.net
+    See website for tutorials and other documentation.
+
+    The MIT License (MIT)
+
+    Copyright (c) 2016 Douglas McKechie
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+-->
+<html>
+    <head>
+        <title>HTML5 Canvas Winning Wheel</title>
+        <script type="text/javascript" src="../../Winwheel.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    </head>
+    <body>
+        <div style="background-image: url('Frame\ 5.png'); background-repeat: no-repeat; width: 
+        915px; height: 516px; display: flex;">
+            <div style="border-width: medium; border-style: solid; width: 50%; height: 100%; flex: 1;">
+                <canvas id="canvas" width="315" height="418" style="margin-left: 75px; margin-top: 75px;">
+                    <p style="color: white">Sorry, your browser doesn't support canvas. Please try another.</p>
+                </canvas>
+            </div>
+            <div style="width: 50%; height: 100%; border-width: medium; border-style: solid; flex: 1;">
+                <div style=" height: 80%; border-width: medium; border-style: solid; text-align: center;">
+                    <img src="logo2.png"/>
+                </div>
+                <div style="text-align: center;">
+                    <img id="spin_button" src="Group 6.png" alt="Spin" onClick="startSpin();" />
+                </div>
+            </div>
+        </div>
+        <script>
+            // Create new wheel object specifying the parameters at creation time.
+            let theWheel = new Winwheel({
+                'numSegments'       : 4,         // Specify number of segments.
+                'outerRadius'       : 150,       // Set outer radius so wheel fits inside the background.
+                'drawMode'          : 'image',   // drawMode must be set to image.
+                'drawText'          : false,      // Need to set this true if want code-drawn text on image wheels.
+                'textFontSize'      : 12,        // Set text options as desired.
+                'textOrientation'   : 'curved',
+                'textDirection'     : 'reversed',
+                'textAlignment'     : 'outer',
+                'textMargin'        : 5,
+                'textFontFamily'    : 'monospace',
+                'textStrokeStyle'   : 'black',
+                'textLineWidth'     : 2,
+                'textFillStyle'     : 'white',
+                'segments'     :                // Define segments.
+                [
+                   {'text' : 'FREE SHIPPING'},
+                   {'text' : '5% OFF'},
+                   {'text' : 'FREE GIFT'},
+                   {'text' : '10% OFF'}
+                ],
+                'animation' :                   // Specify the animation to use.
+                {
+                    'type'     : 'spinToStop',
+                    'duration' : 5,     // Duration in seconds.
+                    'spins'    : 8,     // Number of complete spins.
+                    'callbackFinished' : alertPrize
+                }
+            });
+
+            // Create new image object in memory.
+            let loadedImg = new Image();
+
+            // Create callback to execute once the image has finished loading.
+            loadedImg.onload = function()
+            {
+                theWheel.wheelImage = loadedImg;    // Make wheelImage equal the loaded image object.
+                theWheel.draw();                    // Also call draw function to render the wheel.
+            }
+
+            // Set the image source, once complete this will trigger the onLoad callback (above).
+            loadedImg.src = "wheel (1).png";
+
+
+
+            // Vars used by the code in this page to do power controls.
+            let wheelPower    = 0;
+            let wheelSpinning = false;
+
+            // -------------------------------------------------------
+            // Click handler for spin button.
+            // -------------------------------------------------------
+            function startSpin()
+            {
+                // Ensure that spinning can't be clicked again while already running.
+                if (wheelSpinning == false) {
+                    // Based on the power level selected adjust the number of spins for the wheel, the more times is has
+                    // to rotate with the duration of the animation the quicker the wheel spins.
+                    if (wheelPower == 1) {
+                        theWheel.animation.spins = 2;
+                    } else if (wheelPower == 2) {
+                        theWheel.animation.spins = 5;
+                    } else if (wheelPower == 3) {
+                        theWheel.animation.spins = 8;
+                    }
+
+                    // Disable the spin button so can't click again while wheel is spinning.
+                    document.getElementById('spin_button').src       = "Group 6.png";
+                    document.getElementById('spin_button').className = "";
+
+                    // Begin the spin animation by calling startAnimation on the wheel object.
+                    theWheel.startAnimation();
+
+                    // Set to true so that power can't be changed and spin button re-enabled during
+                    // the current animation. The user will have to reset before spinning again.
+                    wheelSpinning = true;
+                }
+            }
+            // -------------------------------------------------------
+            // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
+            // note the indicated segment is passed in as a parmeter as 99% of the time you will want to know this to inform the user of their prize.
+            // -------------------------------------------------------
+            function alertPrize(indicatedSegment)
+            {
+                // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
+                alert("The wheel stopped on " + indicatedSegment.text);
+            }
+        </script>
+    </body>
+</html>
