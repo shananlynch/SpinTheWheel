@@ -28,7 +28,11 @@
             </div>
             <div style="width: 50%; height: 100%; flex: 1;">
                 <div style=" height: 80%; text-align: center;">
-                    <img src="img/logo.png"/>
+                    <img id="main_image" src="img/logo.png"/>
+                    <img id="10_Off" src="img/10_Off.png"  style="margin-top: 100px; display: none;"/>
+                    <img id="5_Off" src="img/5_Off.png"  style="margin-top: 100px; display: none;"/>
+                    <img id="free_Shipping" src="img/free_Shipping.png"  style="margin-top: 100px; display: none;"/>
+                    <img id="free_Gift" src="img/free_Gift.png"  style="margin-top: 100px; display: none;"/>
                 </div>
                 <div style="text-align: center;">
                     <img id="spin_button" src="img/button.png" alt="Spin" onClick="startSpin();" style="cursor: pointer;" />
@@ -53,10 +57,10 @@
                 'textFillStyle'     : 'white',
                 'segments'     :                // Define segments.
                 [
-                   {'text' : 'FREE SHIPPING'},
-                   {'text' : '5% OFF'},
-                   {'text' : 'FREE GIFT'},
-                   {'text' : '10% OFF'}
+                   {'text' : 'free_Shipping'},
+                   {'text' : '5_Off'},
+                   {'text' : 'free_Gift'},
+                   {'text' : '10_Off'}
                 ],
                 'animation' :                   // Specify the animation to use.
                 {
@@ -122,9 +126,10 @@
             function alertPrize(indicatedSegment)
             {
                 // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
-                alert("The wheel stopped on " + indicatedSegment.text);
-                // var spinButton = document.getElementById("spin_button");
-                // element.style.visibility = "none";
+                document.getElementById("main_image").style.display = "none";
+                document.getElementById(indicatedSegment.text).style.display=null;
+                var spinButton = document.getElementById("spin_button");
+                spinButton.style.display = "none";
             }
         </script>
     </body>
