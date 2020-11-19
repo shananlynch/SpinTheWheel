@@ -5,7 +5,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     </head>
     <body>
-        <div style="background-image: url('img/bg.png'); background-repeat: no-repeat; width: 
+        <div style="background-image: url('bg.png'); background-repeat: no-repeat; width: 
         915px; height: 516px; display: flex;">
 
             <div style="width: 50%; height: 100%; flex: 1;display: flex;">
@@ -20,7 +20,7 @@
 
 
                 <div style="text-align: center; height: 100%; flex: 1; margin-top: 180px;">
-                    <img src="img/pointer.png" style="margin-top: 100px; position: absolute; left: 410px;"/>
+                    <img src="pointer.png" style="margin-top: 100px; position: absolute; left: 410px;"/>
                 </div>
 
 
@@ -28,14 +28,14 @@
             </div>
             <div style="width: 50%; height: 100%; flex: 1;">
                 <div style=" height: 80%; text-align: center;">
-                    <img id="main_image" src="img/logo.png"/>
-                    <img id="10_Off" src="img/10_Off.png"  style="margin-top: 100px; display: none;"/>
-                    <img id="5_Off" src="img/5_Off.png"  style="margin-top: 100px; display: none;"/>
-                    <img id="free_Shipping" src="img/free_Shipping.png"  style="margin-top: 100px; display: none;"/>
-                    <img id="free_Gift" src="img/free_Gift.png"  style="margin-top: 100px; display: none;"/>
+                    <img id="main_image" src="logo.png"/>
+                    <img id="10_Off" src="10_Off.png"  style="margin-top: 100px; display: none;"/>
+                    <img id="5_Off" src="5_Off.png"  style="margin-top: 100px; display: none;"/>
+                    <img id="free_Shipping" src="free_Shipping.png"  style="margin-top: 100px; display: none;"/>
+                    <img id="free_Gift" src="free_Gift.png"  style="margin-top: 100px; display: none;"/>
                 </div>
                 <div style="text-align: center;">
-                    <img id="spin_button" src="img/button.png" alt="Spin" onClick="startSpin();" style="cursor: pointer;" />
+                    <img id="spin_button" src="button.png" alt="Spin" onClick="startSpin();" style="cursor: pointer;" />
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
             }
 
             // Set the image source, once complete this will trigger the onLoad callback (above).
-            loadedImg.src = "img/wheel.png";
+            loadedImg.src = "wheel.png";
 
 
 
@@ -108,7 +108,7 @@
                     }
 
                     // Disable the spin button so can't click again while wheel is spinning.
-                    document.getElementById('spin_button').src       = "img/button.png";
+                    document.getElementById('spin_button').src       = "button.png";
                     document.getElementById('spin_button').className = "";
 
                     // Begin the spin animation by calling startAnimation on the wheel object.
