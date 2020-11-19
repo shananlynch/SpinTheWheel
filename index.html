@@ -1,21 +1,30 @@
 <html>
     <head>
         <title>HTML5 Canvas Winning Wheel</title>
-        <script type="text/javascript" src="Winwheel.min.js"></script>
+        <script type="text/javascript" src="Winwheel.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     </head>
     <body>
         <div style="background-image: url('img/bg.png'); background-repeat: no-repeat; width: 
         915px; height: 516px; display: flex;">
-            <div style="width: 50%; height: 100%; flex: 1;">
-                <div style="height: 30%; text-align: center;">
-                    <img src="img/pointer.png" style="margin-top: 100px;"/>
-                </div>
-                <div style="text-align: center; height: 70%;">
+
+            <div style="width: 50%; height: 100%; flex: 1;display: flex;">
+
+
+                <div style="height: 100%; width: 100%; text-align: center; flex: 1; margin-top: 100px; margin-left: 110px;">
                     <canvas id="canvas" width="315" height="300">
                         <p style="color: white">Sorry, your browser doesn't support canvas. Please try another.</p>
                     </canvas>
                 </div>
+
+
+
+                <div style="text-align: center; height: 100%; flex: 1; margin-top: 130px;">
+                    <img src="img/pointer.png" style="margin-top: 100px;"/>
+                </div>
+
+
+
             </div>
             <div style="width: 50%; height: 100%; flex: 1;">
                 <div style=" height: 80%; text-align: center;">
@@ -114,6 +123,8 @@
             {
                 // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
                 alert("The wheel stopped on " + indicatedSegment.text);
+                // var spinButton = document.getElementById("spin_button");
+                // element.style.visibility = "none";
             }
         </script>
     </body>
